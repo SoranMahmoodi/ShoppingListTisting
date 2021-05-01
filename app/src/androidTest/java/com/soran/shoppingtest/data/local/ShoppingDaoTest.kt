@@ -8,14 +8,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.soran.shoppingtest.model.ShoppingItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
+import com.soran.shoppingtest.repository.local.Database
+import com.soran.shoppingtest.repository.local.ShoppingItemDao
 import com.soran.shoppingtest.getOrAwaitValue
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before

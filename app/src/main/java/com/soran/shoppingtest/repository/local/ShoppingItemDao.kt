@@ -1,4 +1,4 @@
-package com.soran.shoppingtest.data.local
+package com.soran.shoppingtest.repository.local
 
 import androidx.room.*
 import com.soran.shoppingtest.model.ShoppingItem

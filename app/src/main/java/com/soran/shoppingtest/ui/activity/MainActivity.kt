@@ -1,7 +1,8 @@
-package com.soran.shoppingtest
+package com.soran.shoppingtest.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.soran.shoppingtest.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

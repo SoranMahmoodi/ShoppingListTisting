@@ -12,32 +12,38 @@ import com.google.common.truth.Truth.assertThat
 import com.soran.shoppingtest.repository.local.Database
 import com.soran.shoppingtest.repository.local.ShoppingItemDao
 import com.soran.shoppingtest.getOrAwaitValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 @MediumTest
+@HiltAndroidTest
 class ShoppingDaoTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @get:Rule
+    val hiltTest = HiltAndroidRule(this)
+
+    @Inject
+    @Named("test_db")
     lateinit var database: Database
+
     lateinit var shoppingItemDao: ShoppingItemDao
 
     @Before
     fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            Database::class.java
-        ).allowMainThreadQueries().build()
-
+        hiltTest.inject()
         shoppingItemDao = database.getShoppingDao()
     }
 
@@ -79,7 +85,7 @@ class ShoppingDaoTest {
 
         val shoppingItems = shoppingItemDao.getPriceShopping().asLiveData().getOrAwaitValue()
 
-        assertThat(shoppingItems).isEqualTo(10 * 5.5f + 4 * 40f)
+        assertThat(shoppingItems).isEqualTo(10 * 5.5f + 4 * 10f)
 
 
     }

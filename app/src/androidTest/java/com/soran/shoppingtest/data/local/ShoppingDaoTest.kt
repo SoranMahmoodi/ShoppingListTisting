@@ -12,6 +12,8 @@ import com.google.common.truth.Truth.assertThat
 import com.soran.shoppingtest.repository.local.Database
 import com.soran.shoppingtest.repository.local.ShoppingItemDao
 import com.soran.shoppingtest.getOrAwaitValue
+import com.soran.shoppingtest.launchFragmentInHiltContainer
+import com.soran.shoppingtest.ui.fragment.shopping.ShoppingFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.test.runBlockingTest
@@ -51,6 +53,12 @@ class ShoppingDaoTest {
     @After
     fun closeDatabase() {
         database.close()
+    }
+
+    @Test
+    fun launch_fragment_shopping_return_success() {
+        launchFragmentInHiltContainer<ShoppingFragment> {
+        }
     }
 
     @Test

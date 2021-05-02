@@ -2,6 +2,8 @@ package com.soran.shoppingtest.di
 
 import android.content.Context
 import androidx.room.Room
+import com.soran.shoppingtest.repository.RepositoryImplShopping
+import com.soran.shoppingtest.repository.RepositoryShopping
 import com.soran.shoppingtest.repository.local.Database
 import com.soran.shoppingtest.repository.network.ImageApi
 import com.soran.shoppingtest.utils.Constants.BASE_URL
@@ -43,4 +45,7 @@ object AppModule {
     @Provides
     fun providerImageApi(retrofit: Retrofit): ImageApi = retrofit.create(ImageApi::class.java)
 
+    @Provides
+    fun providerRepositoryShopping(repositoryImplShopping: RepositoryImplShopping): RepositoryShopping =
+        repositoryImplShopping
 }

@@ -13,5 +13,8 @@ class Resource<out T>(val status: Status, val data: T?, val massage: String?) {
         fun <T> loading(data: T?): Resource<T> {
             return Resource(Status.LOADING, data, null)
         }
+        fun <T> empty(): Resource<T> {
+            return Resource(Status.EMPTY, null, null)
+        }
     }
 }

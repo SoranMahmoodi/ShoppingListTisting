@@ -20,17 +20,15 @@ class ImagePickViewModel @Inject constructor(val repositoryShopping: RepositoryS
     private val _image = MutableSharedFlow<Event<Resource<ImageResponse>>>()
     val image: SharedFlow<Event<Resource<ImageResponse>>> = _image
 
-    private val _curImageUrl = MutableSharedFlow<String>()
-    val curImageUrl: SharedFlow<String> = _curImageUrl
 
-
-    fun setCurImageUrl(urlImage: String) {
-        viewModelScope.launch(Dispatchers.Main) {
-            _curImageUrl.emit(urlImage)
+    fun searchForImage(imageQuery: String) {
+        if (imageQuery.isEmpty()) {
+            return
         }
-    }
-
-    fun searchForImage(imageQuery:String) {
-
+        viewModelScope.launch {
+            _image.emit(Event(Resource.loading(null)))
+            val response = repositoryShopping.searchImage(imageQuery)
+            _image.emit(Event(response))
+        }
     }
 }

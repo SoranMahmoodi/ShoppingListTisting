@@ -21,6 +21,8 @@ import javax.inject.Inject
 class AddShoppingViewModel @Inject constructor(private val repositoryShopping: RepositoryShopping) :
     ViewModel() {
 
+    val shoppingItems = repositoryShopping.getShoppingItems()
+
     private val _insertShoppingItemStatus =
         MutableStateFlow<Event<Resource<ShoppingItem>>>(Event(Resource.empty()))
     val insertShoppingItemStatus: StateFlow<Event<Resource<ShoppingItem>>> =

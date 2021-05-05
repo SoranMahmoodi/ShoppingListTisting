@@ -2,6 +2,9 @@ package com.soran.shoppingtest.di
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.soran.shoppingtest.R
 import com.soran.shoppingtest.repository.RepositoryImplShopping
 import com.soran.shoppingtest.repository.RepositoryShopping
 import com.soran.shoppingtest.repository.local.Database
@@ -28,7 +31,7 @@ object AppModule {
         context,
         Database::class.java,
         DATABASE_NAME
-    ).build()
+    ).allowMainThreadQueries().build()
 
 
     @Provides
@@ -38,6 +41,16 @@ object AppModule {
             .baseUrl(BASE_URL)
             .build()
 
+
+    @Provides
+    fun providerGlideInstant(
+        @ApplicationContext context: Context
+    )= Glide.with(context)
+        .setDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
+        )
 
     @Provides
     fun providerShoppingDao(database: Database) = database.getShoppingDao()

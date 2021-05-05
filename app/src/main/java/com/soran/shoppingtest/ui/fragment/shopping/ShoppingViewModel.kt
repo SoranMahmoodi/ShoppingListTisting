@@ -15,6 +15,12 @@ class ShoppingViewModel @Inject constructor(val repositoryShopping: RepositorySh
     val shoppingItems = repositoryShopping.getShoppingItems()
     val totalPrice = repositoryShopping.geTotalPrice()
 
+    fun insertShoppingItemToDp(shoppingItem: ShoppingItem) = viewModelScope.launch {
+        repositoryShopping.insertShoppingItem(shoppingItem)
+    }
+
+
+
     fun deleteShoppingItem(shoppingItem: ShoppingItem) = viewModelScope.launch {
         repositoryShopping.deleteShoppingItem(shoppingItem)
     }

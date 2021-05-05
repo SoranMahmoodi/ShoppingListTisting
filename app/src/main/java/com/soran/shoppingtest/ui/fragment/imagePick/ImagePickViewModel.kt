@@ -9,7 +9,9 @@ import com.soran.shoppingtest.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,6 +22,15 @@ class ImagePickViewModel @Inject constructor(val repositoryShopping: RepositoryS
     private val _image = MutableSharedFlow<Event<Resource<ImageResponse>>>()
     val image: SharedFlow<Event<Resource<ImageResponse>>> = _image
 
+    private val _curImageUrl = MutableStateFlow<String>("")
+    val curImageUrl: StateFlow<String> = _curImageUrl
+
+
+     fun setCurImageUrl(urlImage: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _curImageUrl.emit(urlImage)
+        }
+    }
 
     fun searchForImage(imageQuery: String) {
         if (imageQuery.isEmpty()) {
